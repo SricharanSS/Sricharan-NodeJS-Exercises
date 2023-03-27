@@ -8,7 +8,7 @@ http.createServer(function(req,res,err) {
         let index = Math.floor(Math.random()*colorCodes.length);
         randomColorPalette.push(colorCodes[index]);
     }
-    // console.log(randomColorPalette);
+    
     fs.writeFileSync("assets/randomized_color_palette.json", JSON.stringify(randomColorPalette));
 
     const newColorCodes = JSON.parse(fs.readFileSync("assets/randomized_color_palette.json","utf-8"));
