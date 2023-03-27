@@ -1,0 +1,14 @@
+{
+  "name": "node-js-exercise-3",
+  "version": "1.0.0",
+  "description": "Exercise-3",
+  "main": "js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sricharan",
+  "license": "ISC",
+  "dependencies": {
+    "random-index": "^1.0.4"
+  }
+}
