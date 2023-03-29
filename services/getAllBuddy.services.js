@@ -1,6 +1,6 @@
 const {readFileSync} = require('fs');
 
-const getAllBuddy = (req,res) => {
+const getAllBuddyService = (data) => {
 
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
         if(err) {
@@ -8,8 +8,10 @@ const getAllBuddy = (req,res) => {
         }
     }));
 
-    res.send(buddyList);
+    console.log("GetAllBuddyService : ",data);
+
+    // res.send(buddyList);
 
 };
 
-module.exports = getAllBuddy;
+module.exports = getAllBuddyService;

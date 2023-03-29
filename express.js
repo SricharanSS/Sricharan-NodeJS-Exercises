@@ -9,8 +9,8 @@ app.use(express.urlencoded(
 // To Get data as JSON
 app.use(express.json());
 
-const buddy = require('./routes/buddy');
-app.use("/buddy", buddy);
+const buddyRoutes = require('./routes/buddy.routes');
+app.use("/buddy", buddyRoutes);
 
 app.use("/",(req,res)=>{
     console.log("Default Moduele");
