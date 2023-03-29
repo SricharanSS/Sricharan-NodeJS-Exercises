@@ -1,16 +1,19 @@
-const http = require("http");
-const fs = require("fs");
+import { readFileSync, writeFileSync } from 'fs';
 
-const colorCodes = JSON.parse(fs.readFileSync("assets/color_ palette.json","utf-8"));
+const colorCodes = JSON.parse(readFileSync("assets/color_ palette.json","utf-8"));
 const randomColorPalette = [];
+let indexArray = [];
 for(let i=0; i<5; i++) {
     let index = Math.floor(Math.random()*colorCodes.length);
-    randomColorPalette.push(colorCodes[index]);
+    if(indexArray.indexOf(index) === -1) {
+        indexArray.push(index);
+        randomColorPalette.push(colorCodes[index]);
+    }
 }
     
-fs.writeFileSync("assets/randomized_color_palette.json", JSON.stringify(randomColorPalette));
+writeFileSync("assets/randomized_color_palette.json", JSON.stringify(randomColorPalette));
 
-const newColorCodes = JSON.parse(fs.readFileSync("assets/randomized_color_palette.json","utf-8"));
+const newColorCodes = JSON.parse(readFileSync("assets/randomized_color_palette.json","utf-8"));
 for(const element of newColorCodes) {
     console.log(element.color);
 }
