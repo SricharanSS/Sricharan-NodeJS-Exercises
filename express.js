@@ -1,6 +1,13 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const port = 4001;
+
+app.use(cors(
+    {
+        origin: "https://www.google.com"
+    }
+));
 
 // To Get data from POST also
 app.use(express.urlencoded(
