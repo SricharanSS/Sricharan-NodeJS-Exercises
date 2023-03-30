@@ -9,22 +9,25 @@ const updateBuddyService = (data) => {
 
     console.log("UpdateBuddyService : ",data);
 
-    // let empid = req.body.empid;
+    let empid = data.empid;
+    console.log(empid);
     
-    // for(let i=0; i<buddyList.length; i++) {
-    //     if(empid == buddyList[i].empid) {
-    //         buddyList[i].realname = req.body.realname;
-    //     }
-    // }
+    for(const element of buddyList) {
+        if(empid == element.empid) {
+            element.realname = data.realname;
+        }
+    }
 
-    // res.send(buddyList);
+    console.log(buddyList);
 
 
-    // fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {
-    //     if(err) {
-    //         console.log(err);
-    //     }
-    // });
+    fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {
+        if(err) {
+            console.log(err);
+        }
+    });
+
+    return(buddyList);
 };
 
 module.exports = updateBuddyService;

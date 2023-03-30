@@ -8,15 +8,14 @@ const getBuddyService = (data)=> {
 
     console.log("GetBuddyService : ",data);
 
-    // let data = req.body;
-    // let id = data.id;
-    // console.log(id);
+    let id = data.id;
+    console.log(id);
 
-    // for(let i=0; i<buddyList.length; i++) {
-    //     if(buddyList[i].empid == id) {
-    //         res.send(buddyList[i]);
-    //     }
-    // }
+    for(const element of buddyList) {
+        if(element.empid == id) {
+            return(element);
+        }
+    }
 
 };
 

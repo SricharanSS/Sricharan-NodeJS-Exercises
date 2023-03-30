@@ -8,19 +8,15 @@ const AddBuddyService = (data)=> {
     }));
 
     console.log("AddBuddyService : ",data);
+    buddyList.push(data);
+    console.log(buddyList);
+    fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
+        if(err) {
+            console.log("AddBuddyListen :: Can't Write to File");
+        }
+    });
 
-    // console.log(buddyList);
-    // console.log(typeof buddyList);
-    // buddyList.push();
-    
-
-    // fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
-    //     if(err) {
-    //         console.log("AddBuddyListen :: Can't Write to File");
-    //     }
-    // });
-
-    // res.send(req.body);
+    return buddyList;
 };
 
 module.exports = AddBuddyService;
