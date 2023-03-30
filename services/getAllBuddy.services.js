@@ -2,16 +2,25 @@ const {readFileSync} = require('fs');
 
 const getAllBuddyService = () => {
 
-    let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
-        if(err) {
-            console.log("getID :: Can't Read from File");
-        }
-    }));
-
-    console.log("GetAllBuddyService : ",buddyList);
-
+    return new Promise((resolve, reject) => {
+        let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
+            if(err) {
+                reject("getID :: Can't Read from File");
+            }
+        }));
     
-    return buddyList;
+        console.log("GetAllBuddyService : ",buddyList);
+    
+        
+        resolve(buddyList);
+    }).then(
+        function(data) {
+            return data;
+        },
+        function(err) {
+            return err;
+        }
+    );
 };
 
-module.exports = getAllBuddyService;
+module.exports = {getAllBuddyService};

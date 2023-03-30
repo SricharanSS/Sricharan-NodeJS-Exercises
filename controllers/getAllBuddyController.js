@@ -1,7 +1,7 @@
 const getAllBuddyService = require('../services/getAllBuddy.services');
 
-const getAllBuddy = (request, response) => {
-    response.send(getAllBuddyService());
+const getAllBuddy = async (request, response) => {
+    response.send(await getAllBuddyService());
 };
 
 module.exports = {getAllBuddy};
