@@ -8,9 +8,9 @@ const deleteBuddyService = (data) => {
         }
     }));
 
-    console.log("DeleteBuddyService : ",data.id);
+    console.log("DeleteBuddyService : ",data.empid);
    
-    let empid = data.id;
+    let empid = data.empid;
     let index = -1;
     for(let i=0; i<buddyList.length; i++) {
         if(empid == parseInt(buddyList[i].empid)) {

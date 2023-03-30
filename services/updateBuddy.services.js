@@ -10,11 +10,11 @@ const updateBuddyService = (data) => {
     console.log("UpdateBuddyService : ",data);
 
     let empid = data.empid;
-    console.log(empid);
+    console.log("UPDATE : ",empid);
     
     for(const element of buddyList) {
         if(empid == element.empid) {
-            element.realname = data.realname;
+            element = data;
         }
     }
 

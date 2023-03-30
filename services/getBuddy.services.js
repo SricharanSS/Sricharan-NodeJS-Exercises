@@ -8,7 +8,7 @@ const getBuddyService = (data)=> {
 
     console.log("GetBuddyService : ",data);
 
-    let id = data.id;
+    let id = data.empid;
     console.log(id);
 
     for(const element of buddyList) {
@@ -16,6 +16,8 @@ const getBuddyService = (data)=> {
             return(element);
         }
     }
+
+    return("Employee Does Not Exists");
 
 };
 
