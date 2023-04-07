@@ -2,6 +2,9 @@ const http = require("http");
 const fs = require("fs");
 
 http.createServer(function(req,res,err) {
+    if(err) {
+        console.log("Server Connection Problem : ",err);
+    }
     const colorCodes = JSON.parse(fs.readFileSync("assets/color_ palette.json","utf-8", (err) => {
         if(err) {
             console.log("Cannot Read from File");
@@ -29,4 +32,4 @@ http.createServer(function(req,res,err) {
     for(const element of newColorCodes) {
         res.write("<h1 style='text-align: center; color : "+element.code.hex+"; background-color: #000; border-radius: 5px;'> Color - "+element.color+"</h1>");
     }
-}).listen(4000);
+}).listen(4001);
