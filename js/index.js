@@ -1,9 +1,9 @@
-import { readFile, readFileSync, writeFile, writeFileSync } from 'fs';
+import { readFile, readFileSync, writeFile} from 'fs';
 
 // Read File 'color_palette.json' and store it a varibale
 function ReadFile() {
     return new Promise( (resolve, reject) => {
-        readFile("assets/color_ palette.json","utf-8", (err, data) => {
+        readFile("assets/color_ palette.json", "utf-8", (err, data) => {
             if(err) {
                 reject("Can't Read File");
             }
@@ -53,7 +53,6 @@ async function runFile() {
     }
    
     // Write to 'randomized_color_palette.json'
-    //writeFileSync("assets/randomized_color_palette.json", randomColorPalette, {encoding : 'utf-8'});
     await WriteFile(JSON.stringify(randomColorPalette));
 
     // Read from 'randomized_color_palette.json' and store it in a variable
