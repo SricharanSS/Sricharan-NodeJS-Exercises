@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = 4001;
+const port = 4002;
 
 // To Get data from POST also
 app.use(express.urlencoded(
