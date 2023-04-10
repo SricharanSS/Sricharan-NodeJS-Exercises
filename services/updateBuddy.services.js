@@ -9,7 +9,7 @@ const updateBuddyService = (data) => {
             }
         }) );
     
-        logger.info("UpdateBuddyService : ",data);
+        logger.info("UpdateBuddyService is requested");
     
         let empid = data.empid;
         console.log("UPDATE : ",empid);
@@ -20,8 +20,6 @@ const updateBuddyService = (data) => {
                element.hobbies = data.hobbies;
             }
         }
-    
-        console.log(buddyList);
     
     
         fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {

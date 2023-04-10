@@ -41,3 +41,5 @@ $(info.level): 10-Apr-2023 09:55:35: 	Started listening on PORT : 4000
 $(info.level): 10-Apr-2023 09:55:36: 	Started listening on PORT : 4000
 $(info.level): 10-Apr-2023 09:56:16: 	Started listening on PORT : 4000
 $(info.level): 10-Apr-2023 09:56:28: 	Started listening on PORT : 4000
+$(info.level): 10-Apr-2023 09:57:34: 	Started listening on PORT : 4000
+$(info.level): 10-Apr-2023 09:57:37: 	GetAllBuddyService : 

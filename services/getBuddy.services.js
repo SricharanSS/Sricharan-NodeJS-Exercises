@@ -10,7 +10,7 @@ const getBuddyService = (data)=> {
             }
         }));
     
-        logger.info("GetBuddyService : ",data);
+        logger.info("GetBuddyService is requested");
     
         let id = data.empid;
     

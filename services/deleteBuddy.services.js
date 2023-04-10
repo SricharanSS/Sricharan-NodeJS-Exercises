@@ -25,7 +25,7 @@ const deleteBuddyService = (data) => {
             resolve("Employee Not Exists");
         }
         else {
-            logger.info("Delete ",buddyList[index].empid);
+            logger.info("Deleted a Buddy from the buddyList");
             buddyList.splice(index,1);
         }
     
@@ -35,7 +35,6 @@ const deleteBuddyService = (data) => {
             }
         });
     
-        logger.info("Deleted : ", buddyList[index]);
         resolve("Deleted : ",buddyList[index]);
 
     }).then(

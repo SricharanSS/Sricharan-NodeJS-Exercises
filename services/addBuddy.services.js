@@ -9,11 +9,11 @@ const AddBuddyService = (data)=> {
             }
         }));
     
-        logger.info("AddBuddyService : ",data);
+        logger.info("AddBuddyService is requested");
         buddyList.push(data);
         fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
             if(err) {
-                logger.error("AddBuddyService Can't write to File : ",err);
+                logger.error("AddBuddyService Can't write to File ",err);
                 reject("AddBuddyListen :: Can't Write to File");
             }
         });
