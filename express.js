@@ -1,8 +1,8 @@
 require('dotenv').config();
 const express = require('express');
 const logger = require('./config/logger.config');
-const app = express();
 const cors = require('cors');
+const app = express();
 const port = process.env.PORT;
 
 // CORS
@@ -17,6 +17,13 @@ app.use(express.urlencoded(
 // To Get data as JSON
 app.use(express.json());
 
+/*
+    Add Routes Listner
+*/
+
+app.use("/",(req,res)=>{
+    console.log("Default Moduele");
+});
 
 app.listen(port , () => {
     logger.info("Server Started Listening on PORT : ",port);
