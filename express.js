@@ -1,19 +1,20 @@
 const express = require('express');
 const app = express();
-const port = 4001;
-
+const logger = require('./utils/logger');
+const port = 4000;
 // To Get data from POST also
 app.use(express.urlencoded(
     {extended: false}
 ));
+
 // To Get data as JSON
 app.use(express.json());
 
 const buddyRoutes = require('./routes/buddy.routes');
-app.use("/buddy", buddyRoutes);
+app.use("/buddy",buddyRoutes);
 
 app.use("/",(req,res)=>{
-    console.log("Default Moduele");
+    logger.info("Default Moduele request made");
 });
 
 app.listen(port, () => {
@@ -21,9 +22,9 @@ app.listen(port, () => {
     if( !fs.existsSync("assets/cdw_ace23_buddies.json") ) {
         fs.writeFileSync("assets/cdw_ace23_buddies.json", "[]", (err)=> {
             if(err) {
-                console.log("Can't Create The File");
+                logger.error("Can't create file cdw_ace_23_buddies.json");
             }
         });
     }
-    console.log("Started listening on PORT : "+port);
+    logger.info("Started listening on PORT : "+port);
 });

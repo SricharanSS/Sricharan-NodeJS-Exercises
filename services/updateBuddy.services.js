@@ -1,11 +1,10 @@
-const { rejects } = require('assert');
 const fs = require('fs');
-const { resolve } = require('path');
-
+const logger = require('../utils/logger');
 const updateBuddyService = (data) => {
     return new Promise((resolve, reject) => {  
         let buddyList = JSON.parse( fs.readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
+                logger.error("UpdateBuddy Can't Read from File : ",err);
                 reject("updateBuddy :: Can't Read from File");
             }
         }) );
@@ -27,6 +26,7 @@ const updateBuddyService = (data) => {
     
         fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {
             if(err) {
+                logger.error("UpdateBuddyService : ",err);
                 reject(err);
             }
         });

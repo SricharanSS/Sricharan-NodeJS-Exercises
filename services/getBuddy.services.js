@@ -1,9 +1,11 @@
 const {readFileSync} = require('fs');
+const logger = require('../utils/logger');
 const getBuddyService = (data)=> {
 
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
             if(err) {
+                logger.error("GetBuddyService : Can't Read from a File",err);
                 reject("getID :: Can't Read from File");
             }
         }));

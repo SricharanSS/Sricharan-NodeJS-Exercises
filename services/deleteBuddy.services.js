@@ -1,17 +1,16 @@
-const { rejects } = require('assert');
 const {readFileSync, writeFileSync} = require('fs');
-
+const logger = require('../utils/logger');
 const deleteBuddyService = (data) => {
 
     return new Promise((resolve, reject) => {
 
         const buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
+                logger.error("DeleteBuddy Can't Read from File", err);
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
     
-        console.log("DeleteBuddyService : ",data.empid);
        
         let empid = data.empid;
         let index = -1;
@@ -26,7 +25,7 @@ const deleteBuddyService = (data) => {
             resolve("Employee Not Exists");
         }
         else {
-            console.log("Delete ",buddyList[index].empid);
+            logger.info("Delete ",buddyList[index].empid);
             buddyList.splice(index,1);
         }
     
@@ -36,6 +35,7 @@ const deleteBuddyService = (data) => {
             }
         });
     
+        logger.info("Deleted : ", buddyList[index]);
         resolve("Deleted : ",buddyList[index]);
 
     }).then(
@@ -43,6 +43,7 @@ const deleteBuddyService = (data) => {
             return data;
         },
         function(err) {
+            logger.error("Delete Buddy Service ERROR : ",err);
             return err;
         }
     );
