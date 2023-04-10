@@ -1,7 +1,12 @@
 const express = require('express');
 const app = express();
 const logger = require('./utils/logger');
+const cors = require('cors');
 const port = 4000;
+
+// Add CORS
+app.use(cors({origin : 'https://www.google.com/'}));
+
 // To Get data from POST also
 app.use(express.urlencoded(
     {extended: false}
