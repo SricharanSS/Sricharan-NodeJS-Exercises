@@ -10,10 +10,9 @@ const getBuddyService = (data)=> {
             }
         }));
     
-        console.log("GetBuddyService : ",data);
+        logger.info("GetBuddyService : ",data);
     
         let id = data.empid;
-        console.log(id);
     
         for(const element of buddyList) {
             if(element.empid == id) {

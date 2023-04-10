@@ -10,7 +10,7 @@ const getAllBuddyService = () => {
             }
         }));
     
-        console.log("GetAllBuddyService : ",buddyList);
+        logger.info("GetAllBuddyService : ",buddyList);
     
         
         resolve(buddyList);

@@ -9,7 +9,7 @@ const updateBuddyService = (data) => {
             }
         }) );
     
-        console.log("UpdateBuddyService : ",data);
+        logger.info("UpdateBuddyService : ",data);
     
         let empid = data.empid;
         console.log("UPDATE : ",empid);

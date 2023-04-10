@@ -9,9 +9,8 @@ const AddBuddyService = (data)=> {
             }
         }));
     
-        console.log("AddBuddyService : ",data);
+        logger.info("AddBuddyService : ",data);
         buddyList.push(data);
-        console.log(buddyList);
         fs.writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
             if(err) {
                 logger.error("AddBuddyService Can't write to File : ",err);
