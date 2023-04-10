@@ -1,12 +1,15 @@
 const http = require("http");
 const fs = require("fs");
 
+const colorPaletteFile = 'assets/color_palette.json';
+const randomizedColorPaletteFile = 'assets/randomized_color_palette.json';
+
 http.createServer(function(req,res,err) {
     if(err) {
         console.log("Server Connection Problem : ",err);
     }
     else {
-        const colorCodes = JSON.parse(fs.readFileSync("assets/color_ palette.json","utf-8", (err) => {
+        const colorCodes = JSON.parse(fs.readFileSync(colorPaletteFile,"utf-8", (err) => {
             if(err) {
                 console.log("Cannot Read from File");
             }
@@ -23,13 +26,13 @@ http.createServer(function(req,res,err) {
             }
         }
         
-        fs.writeFileSync("assets/randomized_color_palette.json", JSON.stringify(randomColorPalette),(err)=> {
+        fs.writeFileSync(randomizedColorPaletteFile, JSON.stringify(randomColorPalette),(err)=> {
             if(err) {
                 console.log("Cannot Write to File");
             }
         });
     
-        const newColorCodes = JSON.parse(fs.readFileSync("assets/randomized_color_palette.json","utf-8"));
+        const newColorCodes = JSON.parse(fs.readFileSync(randomizedColorPaletteFile,"utf-8"));
        
         res.write("<h1>New Color Codes</h1>");
         res.write(JSON.stringify(newColorCodes));
