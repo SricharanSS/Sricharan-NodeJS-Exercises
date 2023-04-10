@@ -6,7 +6,9 @@ const cors = require('cors');
 const port = process.env.PORT;
 
 // Add CORS
-app.use(cors({origin : 'https://www.google.com/'}));
+let corsOption = {origin : 'http://localhost:5500'};
+app.use(cors(corsOption.origin));
+
 
 // To Get data from POST also
 app.use(express.urlencoded(
