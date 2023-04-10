@@ -1,8 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const logger = require('./utils/logger');
 const cors = require('cors');
-const port = 4000;
+const port = process.env.PORT;
 
 // Add CORS
 app.use(cors({origin : 'https://www.google.com/'}));
@@ -19,7 +20,7 @@ const buddyRoutes = require('./routes/buddy.routes');
 app.use("/buddy",buddyRoutes);
 
 app.use("/",(req,res)=>{
-    logger.info("Default Moduele request made");
+    logger.log( {message : "Default Moduele request made", level : process.env.INFO});
 });
 
 app.listen(port, () => {
@@ -27,9 +28,9 @@ app.listen(port, () => {
     if( !fs.existsSync("assets/cdw_ace23_buddies.json") ) {
         fs.writeFileSync("assets/cdw_ace23_buddies.json", "[]", (err)=> {
             if(err) {
-                logger.error("Can't create file cdw_ace_23_buddies.json");
+                logger.log( { message : "Can't create file cdw_ace_23_buddies.json", level : process.env.ERROR});
             }
         });
     }
-    logger.info("Started listening on PORT : "+port);
+    logger.log({ message : "Started listening on PORT : "+port, level: process.env.INFO});
 });

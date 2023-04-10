@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {readFileSync, writeFileSync} = require('fs');
 const logger = require('../utils/logger');
 const deleteBuddyService = (data) => {
@@ -6,7 +7,7 @@ const deleteBuddyService = (data) => {
 
         const buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
-                logger.error("DeleteBuddy Can't Read from File", err);
+                logger.log( {message : "DeleteBuddy Can't Read from File", level : process.env.ERROR});
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
@@ -25,12 +26,13 @@ const deleteBuddyService = (data) => {
             resolve("Employee Not Exists");
         }
         else {
-            logger.info("Deleted a Buddy from the buddyList");
+            logger.log( { message : "Deleted a Buddy from the buddyList", level : process.env.INFO});
             buddyList.splice(index,1);
         }
     
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err) => {
             if(err) {
+                logger.log({message : "DeleteBuddy : Can't Write to File", level : process.env.ERROR});
                 reject("DeleteBuddy :: Can't write to File");
             }
         });
@@ -42,7 +44,7 @@ const deleteBuddyService = (data) => {
             return data;
         },
         function(err) {
-            logger.error("Delete Buddy Service ERROR : ",err);
+            logger.log( { message : "Delete Buddy Service ERROR : ", level : process.env.ERROR});
             return err;
         }
     );

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const {readFileSync} = require('fs');
 const logger = require('../utils/logger');
 const getAllBuddyService = () => {
@@ -5,12 +6,12 @@ const getAllBuddyService = () => {
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
             if(err) {
-                logger.error("GetAllBuddyService Can't read from a file",err);
+                logger.log( { message : "GetAllBuddyService Can't read from a file", level : process.env.ERROR});
                 reject("getID :: Can't Read from File");
             }
         }));
     
-        logger.info("GetAllBuddyService is Requested");
+        logger.log( { message : "GetAllBuddyService is Requested", level : process.env.INFO});
     
         
         resolve(buddyList);
