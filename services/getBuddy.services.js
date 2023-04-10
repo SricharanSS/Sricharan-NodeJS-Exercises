@@ -1,5 +1,5 @@
 const {readFileSync} = require('fs');
-const getBuddyService = (data)=> {
+const GetBuddyService = (data)=> {
 
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
@@ -31,4 +31,4 @@ const getBuddyService = (data)=> {
 
 };
 
-module.exports = {getBuddyService};
+module.exports = {GetBuddyService};

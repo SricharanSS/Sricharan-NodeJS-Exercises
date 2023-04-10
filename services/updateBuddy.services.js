@@ -2,7 +2,7 @@ const { rejects } = require('assert');
 const fs = require('fs');
 const { resolve } = require('path');
 
-const updateBuddyService = (data) => {
+const UpdateBuddyService = (data) => {
     return new Promise((resolve, reject) => {  
         let buddyList = JSON.parse( fs.readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
@@ -43,4 +43,4 @@ const updateBuddyService = (data) => {
 
 };
 
-module.exports = {updateBuddyService};
+module.exports = {UpdateBuddyService};

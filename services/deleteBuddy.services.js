@@ -1,7 +1,7 @@
 const { rejects } = require('assert');
 const {readFileSync, writeFileSync} = require('fs');
 
-const deleteBuddyService = (data) => {
+const DeleteBuddyService = (data) => {
 
     return new Promise((resolve, reject) => {
 
@@ -49,4 +49,4 @@ const deleteBuddyService = (data) => {
 
 };
 
-module.exports = {deleteBuddyService};
+module.exports = {DeleteBuddyService};
