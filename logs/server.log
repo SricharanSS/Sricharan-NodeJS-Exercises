@@ -208,3 +208,5 @@ $(info.level): 10-Apr-2023 17:11:01: 	Started listening on PORT : 4002
 $(info.level): 10-Apr-2023 17:11:03: 	GetAllBuddyService is Requested
 $(info.level): 10-Apr-2023 17:11:12: 	Started listening on PORT : 4002
 $(info.level): 10-Apr-2023 17:11:14: 	GetAllBuddyService is Requested
+$(info.level): 11-Apr-2023 10:14:47: 	Started listening on PORT : 4002
+$(info.level): 11-Apr-2023 10:15:05: 	GetAllBuddyService is Requested
