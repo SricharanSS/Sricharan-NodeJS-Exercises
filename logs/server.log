@@ -217,3 +217,13 @@ $(info.level): 11-Apr-2023 10:25:30: 	AddBuddyService is requested
 $(info.level): 11-Apr-2023 10:25:30: 	Add Buddy Service request is made
 $(info.level): 11-Apr-2023 10:25:31: 	AddBuddyService is requested
 $(info.level): 11-Apr-2023 10:25:31: 	Add Buddy Service request is made
+$(info.level): 11-Apr-2023 20:15:15: 	Started listening on PORT : 4002
+$(info.level): 11-Apr-2023 20:15:21: 	Default Moduele request made
+$(info.level): 11-Apr-2023 20:15:45: 	AddBuddyService is requested
+$(info.level): 11-Apr-2023 20:16:15: 	Started listening on PORT : 4002
+$(info.level): 11-Apr-2023 20:16:18: 	AddBuddyService is requested
+$(info.level): 11-Apr-2023 20:16:18: 	Add Buddy Service request is made
+$(info.level): 12-Apr-2023 17:22:02: 	Started listening on PORT : 4002
+$(info.level): 12-Apr-2023 17:22:12: 	Default Moduele request made
+$(info.level): 12-Apr-2023 17:22:25: 	Default Moduele request made
+$(info.level): 12-Apr-2023 17:22:58: 	GetBuddyService is requested

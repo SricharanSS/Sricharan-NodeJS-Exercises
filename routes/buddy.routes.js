@@ -3,11 +3,11 @@ const router = express.Router();
 
 const buddyController = require('../controllers/buddy.controller');
 
-router.post("/add", buddyController.addBuddy);
-router.get("/get", buddyController.getBuddy);
-router.get("/getAll", buddyController.getAllBuddy);
-router.put("/update", buddyController.updateBuddy);
-router.delete("/delete", buddyController.deleteBuddy);
+router.post("/addBuddy", buddyController.addBuddy);
+router.get("/getBuddy/:empid", buddyController.getBuddy);
+router.get("/getAllBuddies", buddyController.getAllBuddies);
+router.put("/updateBuddy/:empid", buddyController.updateBuddy);
+router.delete("/deleteBuddy/:empid", buddyController.deleteBuddy);
 
 
 module.exports = router;

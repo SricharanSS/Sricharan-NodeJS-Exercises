@@ -32,9 +32,8 @@ const addBuddyService = (data)=> {
     );
 };
 
-
 /*  Delete Buddy Service  */
-const deleteBuddyService = (data) => {
+const deleteBuddyService = (empid) => {
 
     return new Promise((resolve, reject) => {
 
@@ -44,22 +43,15 @@ const deleteBuddyService = (data) => {
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
-        let empid = data.empid;
         let index = -1;
         for(let i=0; i<buddyList.length; i++) {
-            if(empid == parseInt(buddyList[i].empid)) {
+            if(empid === parseInt(buddyList[i].empid)) {
                 index = i;
                 break;
             }
         }
-    
-        if(index == -1) {
-            resolve("Employee Not Exists");
-        }
-        else {
-            logger.log( { message : "Deleted a Buddy from the buddyList", level : process.env.INFO});
-            buddyList.splice(index,1);
-        }
+        logger.log( { message : "Deleted a Buddy from the buddyList", level : process.env.INFO});
+        buddyList.splice(index,1);
     
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err) => {
             if(err) {
@@ -84,7 +76,7 @@ const deleteBuddyService = (data) => {
 
 
 /*  Get All Buddy Service  */
-const getAllBuddyService = () => {
+const getAllBuddiesService = () => {
 
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
@@ -109,7 +101,7 @@ const getAllBuddyService = () => {
 
 
 /*  Get Buddy Service  */
-const getBuddyService = (data)=> {
+const getBuddyService = (empid)=> {
 
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
@@ -120,11 +112,10 @@ const getBuddyService = (data)=> {
         }));
     
         logger.log({message : "GetBuddyService is requested", level : process.env.INFO});
-    
-        let id = data.empid;
+
     
         for(const element of buddyList) {
-            if(element.empid == id) {
+            if(element.empid == empid) {
                 resolve(element);
             }
         }
@@ -142,7 +133,7 @@ const getBuddyService = (data)=> {
 
 
 /*  Update Buddy Service  */
-const updateBuddyService = (data) => {
+const updateBuddyService = (empid, data) => {
     return new Promise((resolve, reject) => {  
         let buddyList = JSON.parse( readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
@@ -152,12 +143,11 @@ const updateBuddyService = (data) => {
         }) );
     
         logger.log( {message : "UpdateBuddyService is requested", level: process.env.INFO} );
-    
-        let empid = data.empid;
         console.log("UPDATE : ",empid);
     
         for(let element of buddyList) {
-            if(empid == element.empid) {
+            if(empid === element.empid) {
+               element.realname = data.realname;
                element.nickname = data.nickname;
                element.hobbies = data.hobbies;
             }
@@ -184,7 +174,7 @@ const updateBuddyService = (data) => {
 module.exports = {
     addBuddyService,
     deleteBuddyService,
-    getAllBuddyService,
+    getAllBuddiesService,
     getBuddyService,
     updateBuddyService
 };
