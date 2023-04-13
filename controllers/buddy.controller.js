@@ -1,6 +1,6 @@
 const {addBuddyService, deleteBuddyService, getAllBuddiesService, getBuddyService, updateBuddyService} = require('../services/buddy.service');
 const {readFileSync} = require('fs');
-const logger = require('../utils/logger');
+
 
 /*  Add Buddy Controller :: START  */
 const addBuddy = async (request, response) => {
@@ -15,7 +15,7 @@ const addBuddy = async (request, response) => {
     if(data.empid >= 1000 && data <= 3000) {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
             if(err) {
-                logger.log( { message : "AddBuddyController :: Can't Read File", level : process.env.ERROR});
+                console.log("AddBuddyController :: Can't Read File");
             }
         }));
         let flag = 0;
@@ -53,7 +53,7 @@ const deleteBuddy = async (request, response) => {
     // Reading buddies File - JSON
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
         if(err) {
-            logger.log( { message : "DeleteBuddyController :: Can't Read File", level : process.env.ERROR});
+            console.log("DeleteBuddyController :: Can't Read File");
         }
     }));
 
@@ -92,7 +92,7 @@ const getBuddy = async (request, response) => {
     // Reading buddies File - JSON
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
         if(err) {
-            logger.log( { message : "GetBuddyController :: Can't Read File", level : process.env.ERROR});
+            console.log("GetBuddyController :: Can't Read File");
         }
     }));
 
@@ -104,13 +104,13 @@ const getBuddy = async (request, response) => {
             break;
         }
     }
+
     if(!flag) {
         response.send("Buddy Not Exists");
+    } else {
+        // Calling the Service and returning the response
+        response.send(await getBuddyService(request.params.empid));
     }
-    
-
-    // Calling the Service and returning the response
-    response.send(await getBuddyService(request.params.empid));
 };
 /*  Get Buddy Controller :: END  */
 
@@ -132,7 +132,7 @@ const updateBuddy = async (request, response) => {
     // Reading buddies File - JSON
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
         if(err) {
-            logger.log( { message : "GetBuddyController :: Can't Read File", level : process.env.ERROR});
+            console.log("GetBuddyController :: Can't Read File");
         }
     }));
 

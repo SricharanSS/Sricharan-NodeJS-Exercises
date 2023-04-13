@@ -1,13 +1,12 @@
 require('dotenv').config();
 const {readFileSync, writeFileSync} = require('fs');
-const logger = require('../utils/logger');
 
 /*  Add Buddy Service  */
 const addBuddyService = (data)=> {
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
             if(err) {
-                logger.log( { message : "AddBuddyService Can't Read File", level : process.env.ERROR});
+                console.log("AddBuddyService Can't Read File");
                 reject("AddBuddyListen :: Can't Read File");
             }
         }));
@@ -16,14 +15,14 @@ const addBuddyService = (data)=> {
         buddyList.push(data);
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
             if(err) {
-                logger.log( { message : "AddBuddyService Can't write to File ", level : process.env.ERROR});
+                console.log("AddBuddyService Can't write to File");
                 reject("AddBuddyListen :: Can't Write to File");
             }
         });
         resolve(buddyList);
     }).then (
         function(data) {
-            logger.log( { message : "Add Buddy Service request is made", level : process.env.INFO});
+            console.log("Add Buddy Service request is made");
             return data;
         },
         function(err) {
@@ -39,7 +38,7 @@ const deleteBuddyService = (empid) => {
 
         const buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
-                logger.log( {message : "DeleteBuddy Can't Read from File", level : process.env.ERROR});
+                console.log("DeleteBuddy Can't Read from File");
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
@@ -50,12 +49,12 @@ const deleteBuddyService = (empid) => {
                 break;
             }
         }
-        logger.log( { message : "Deleted a Buddy from the buddyList", level : process.env.INFO});
+        console.log("Deleted a Buddy from the buddyList");
         buddyList.splice(index,1);
     
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err) => {
             if(err) {
-                logger.log({message : "DeleteBuddy : Can't Write to File", level : process.env.ERROR});
+                console.log("DeleteBuddy : Can't Write to File");
                 reject("DeleteBuddy :: Can't write to File");
             }
         });
@@ -67,7 +66,7 @@ const deleteBuddyService = (empid) => {
             return data;
         },
         function(err) {
-            logger.log( { message : "Delete Buddy Service ERROR : ", level : process.env.ERROR});
+            console.log("Delete Buddy Service ERROR ", err);
             return err;
         }
     );
@@ -81,12 +80,12 @@ const getAllBuddiesService = () => {
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
             if(err) {
-                logger.log( { message : "GetAllBuddyService Can't read from a file", level : process.env.ERROR});
+                console.log("GetAllBuddyService Can't read from a file");
                 reject("getID :: Can't Read from File");
             }
         }));
     
-        logger.log( { message : "GetAllBuddyService is Requested", level : process.env.INFO});
+        console.log("GetAllBuddyService is Requested");
     
         resolve(buddyList);
     }).then(
@@ -106,20 +105,19 @@ const getBuddyService = (empid)=> {
     return new Promise((resolve, reject) => {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json",(err)=> {
             if(err) {
-                logger.log( { message : "GetBuddyService : Can't Read from a File", level : process.env.ERROR});
+                console.log("GetBuddyService : Can't Read from a File");
                 reject("getID :: Can't Read from File");
             }
         }));
     
-        logger.log({message : "GetBuddyService is requested", level : process.env.INFO});
-
+        console.log("GetBuddyService is requested");
     
         for(const element of buddyList) {
             if(element.empid == empid) {
                 resolve(element);
             }
         }
-        resolve("Employee Does Not Exists");
+        reject("Employee Does Not Exists");
     }).then(
         function(data) {
             return data;
@@ -137,12 +135,12 @@ const updateBuddyService = (empid, data) => {
     return new Promise((resolve, reject) => {  
         let buddyList = JSON.parse( readFileSync("assets/cdw_ace23_buddies.json", (err) => {
             if(err) {
-                logger.log( {message : "UpdateBuddy Can't Read from File : ", level : process.env.ERROR} );
+                console.log("UpdateBuddy Can't Read from File", err);
                 reject("updateBuddy :: Can't Read from File");
             }
         }) );
     
-        logger.log( {message : "UpdateBuddyService is requested", level: process.env.INFO} );
+        console.log("UpdateBuddyService is requested");
         console.log("UPDATE : ",empid);
     
         for(let element of buddyList) {
@@ -154,7 +152,7 @@ const updateBuddyService = (empid, data) => {
         }
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {
             if(err) {
-                logger.log( {message : "UpdateBuddyService : ", level : process.env.ERROR});
+                console.log("UpdateBuddyService ERROR : ", err);
                 reject(err);
             }
         });
