@@ -41,13 +41,7 @@ const deleteBuddyService = (index) => {
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
-        // let index = -1;
-        // for(let i=0; i<buddyList.length; i++) {
-        //     if(empid === parseInt(buddyList[i].empid)) {
-        //         index = i;
-        //         break;
-        //     }
-        // }
+        
         console.log("Deleted a Buddy from the buddyList");
         buddyList.splice(index,1);
     

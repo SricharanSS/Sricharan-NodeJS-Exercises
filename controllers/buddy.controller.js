@@ -75,12 +75,7 @@ const deleteBuddy = async (request, response) => {
             break;
         }
     }
-    // for(let element of buddyList) {
-    //     if(element.empid === empid) {
-    //         flag  = 1;
-    //         break;
-    //     }
-    // }
+    
     if(!flag) {
         response.status(400).send({status : 400, data : null, message : "Employee Not Exists"});
     }
