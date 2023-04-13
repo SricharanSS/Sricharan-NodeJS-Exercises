@@ -11,7 +11,6 @@ const addBuddyService = (data)=> {
             }
         }));
     
-        logger.log( { message : "AddBuddyService is requested", level : process.env.INFO });
         buddyList.push(data);
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList), (err)=> {
             if(err) {
@@ -148,6 +147,7 @@ const updateBuddyService = (empid, data) => {
                element.realname = data.realname;
                element.nickname = data.nickname;
                element.hobbies = data.hobbies;
+               break;
             }
         }
         writeFileSync("assets/cdw_ace23_buddies.json", JSON.stringify(buddyList),(err)=> {
