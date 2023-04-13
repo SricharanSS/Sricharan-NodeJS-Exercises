@@ -18,7 +18,7 @@ const addBuddyService = (data)=> {
                 reject("AddBuddyListen :: Can't Write to File");
             }
         });
-        resolve(buddyList);
+        resolve(buddyList[buddyList.length -1]);
     }).then (
         function(data) {
             console.log("Add Buddy Service request is made");
@@ -31,7 +31,7 @@ const addBuddyService = (data)=> {
 };
 
 /*  Delete Buddy Service  */
-const deleteBuddyService = (empid) => {
+const deleteBuddyService = (index) => {
 
     return new Promise((resolve, reject) => {
 
@@ -41,13 +41,13 @@ const deleteBuddyService = (empid) => {
                 reject("DeleteBuddy :: Can't Read from File");
             }
         }));
-        let index = -1;
-        for(let i=0; i<buddyList.length; i++) {
-            if(empid === parseInt(buddyList[i].empid)) {
-                index = i;
-                break;
-            }
-        }
+        // let index = -1;
+        // for(let i=0; i<buddyList.length; i++) {
+        //     if(empid === parseInt(buddyList[i].empid)) {
+        //         index = i;
+        //         break;
+        //     }
+        // }
         console.log("Deleted a Buddy from the buddyList");
         buddyList.splice(index,1);
     
@@ -58,7 +58,7 @@ const deleteBuddyService = (empid) => {
             }
         });
     
-        resolve("Deleted : ",buddyList[index]);
+        resolve("Buddy Deleted");
 
     }).then(
         function(data) {

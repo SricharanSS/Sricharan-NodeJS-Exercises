@@ -13,16 +13,17 @@ const addBuddy = async (request, response) => {
 
     // Check for valid empid and if empid already exits or not
     if( !((data.empid >= 1000) && (data.empid <= 3000)) ) {
-        response.send({status : 400, data : null, message : "Emp ID Not Valid"});
+        response.status(400).send({status : 400, data : null, message : "Emp ID Not Valid"});
         console.log("Emp ID Not Valid");
     }
-    else if(data.realname == "" || data.nickname == "" || data.hobbies == "") {   // Check for empty fields
-        response.send({status : 400, data : null, message : "Do Not Give Empty Fields"});
+    // Check for empty fields
+    else if(data.realname == "" || data.nickname == "" || data.hobbies == "") {   
+        response.status(400).send({status : 400, data : null, message : "Do Not Give Empty Fields"});
     }
     else {
         let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
             if(err) {
-                response.send({status : 500, data : null, message : "Can't Read File"});
+                response.status(500).send({status : 500, data : null, message : "Can't Read File"});
                 console.log("AddBuddyController :: Can't Read File");
             }
         }));
@@ -35,11 +36,11 @@ const addBuddy = async (request, response) => {
             }
         }
         if(flag) {
-            response.send({status : 100, data : null, message : "Emp Already Exists"});
+            response.status(403).send({status : 403, data : null, message : "Emp Already Exists"});
         }
         else {
             // Calling AddBuddy Service and returning response
-            response.send({status : 200, data : await addBuddyService(request.body), message : "Buddy Added"});
+            response.status(200).send({status : 200, data : await addBuddyService(request.body), message : "Buddy Added"});
         }
 
     }
@@ -53,31 +54,41 @@ const deleteBuddy = async (request, response) => {
 
     // Check for valid empid 
     if( !((empid >= 1000) && (empid <= 3000)) ) {
-        response.send({status : 400, data : null, message : "Emp ID Not Valid"});
+        response.status(400).send({status : 400, data : null, message : "Emp ID Not Valid"});
     }
 
     // Reading buddies File - JSON
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
         if(err) {
             console.log("DeleteBuddyController :: Can't Read File");
-            response.send({status : 500, data : null, message : "Can't Read File"});
+            response.status(500).send({status : 500, data : null, message : "Can't Read File"});
         }
     }));
 
     // Checking if the buddy exists or not
     let flag = 0;
-    for(let element of buddyList) {
-        if(element.empid === empid) {
-            flag  = 1;
+    let index = -1;
+    for(let i = 0; i<buddyList.length; i++) {
+        if(buddyList[i].empid === empid) {
+            flag = 1;
+            index = i;
             break;
         }
     }
+    // for(let element of buddyList) {
+    //     if(element.empid === empid) {
+    //         flag  = 1;
+    //         break;
+    //     }
+    // }
     if(!flag) {
-        response.send({status : 400, data : null, message : "Employee Not Exists"});
+        response.status(400).send({status : 400, data : null, message : "Employee Not Exists"});
+    }
+    else {
+        // Calling Service and returning response
+        response.status(200).send({status : 200, data : await deleteBuddyService(index), message : "Buddy Deleted"});
     }
 
-    // Calling Service and returning response
-    response.send(await deleteBuddyService(request.params.empid));
 };
 /*  Delete Buddy Controller :: END  */
 
@@ -93,7 +104,7 @@ const getAllBuddies = async (request, response) => {
 const getBuddy = async (request, response) => {
     const empid = request.params.empid;
     if( !((empid >= 1000) && (empid <= 3000)) ) {
-        response.send({status : 400, data : null, message : "Emp ID Not Valid"});
+        response.status(400).send({status : 400, data : null, message : "Emp ID Not Valid"});
     }
 
     // Reading buddies File - JSON
@@ -113,10 +124,10 @@ const getBuddy = async (request, response) => {
     }
 
     if(!flag) {
-        response.send({status : 100, data : null, message : "Buddy Not Exists"});
+        response.status(100).send({status : 100, data : null, message : "Buddy Not Exists"});
     } else {
         // Calling the Service and returning the response
-        response.send(await getBuddyService(request.params.empid));
+        response.status(200).send({status : 200, data : await getBuddyService(request.params.empid), message : "Buddy Retrived"});
     }
 };
 /*  Get Buddy Controller :: END  */
@@ -133,14 +144,14 @@ const updateBuddy = async (request, response) => {
 
     // Checking if the empid is valid
     if( !((data.empid >= 1000) && (data.empid <= 3000)) ) {
-        response.send({status : 400, data : null, message : "Emp ID Not Valid"});
+        response.status(400).send({status : 400, data : null, message : "Emp ID Not Valid"});
     }
 
     // Reading buddies File - JSON
     let buddyList = JSON.parse(readFileSync("assets/cdw_ace23_buddies.json", 'UTF-8', (err)=> {
         if(err) {
             console.log("GetBuddyController :: Can't Read File");
-            response.send({status : 400, data : null, message : "Can't Read File"});
+            response.status(400).send({status : 400, data : null, message : "Can't Read File"});
         }
     }));
 
@@ -153,11 +164,13 @@ const updateBuddy = async (request, response) => {
         }
     }
     if(!flag) {
-        response.send({status : 100, data : null, message : "Buddy Not Exists"});
+        response.status(100).send({status : 100, data : null, message : "Buddy Not Exists"});
+    }
+    else {
+        // Calling the Service and returning the response
+        response.status(200).send({status : 200, data : await updateBuddyService(request.params.empid, data), message : "Buddy Retrived"});
     }
 
-    // Calling the Service and returning the response
-    response.send(await updateBuddyService(request.params.empid, data));
 };
 /*  Update Buddy Controller :: END  */
 
